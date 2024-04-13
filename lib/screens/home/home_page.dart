@@ -1,3 +1,4 @@
+import 'package:e_book/screens/home/components/recent_book.dart';
 import 'package:e_book/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -84,37 +85,21 @@ class HomePage extends StatelessWidget {
 
     Widget recentbook() {
       return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 30),
         child: Row(
           children: [
-            Container(
-              height: 150,
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                border: Border.all(color: borderColorRecentBook),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/images/recent-book-1.png',
-                    width: 90,
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'The Magic',
-                        style: semiBoldText14.copyWith(color: blackColor2),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            )
+            RecentBook(
+              image: 'assets/images/recent-book-1.png',
+              title: 'The Magic',
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            RecentBook(
+              image: 'assets/images/recent-book-2.png',
+              title: 'The Magic',
+            ),
           ],
         ),
       );
@@ -151,6 +136,9 @@ class HomePage extends StatelessWidget {
                     'Recent Book',
                     style: semiBoldText16.copyWith(color: blackColor),
                   ),
+                ),
+                SizedBox(
+                  height: 12,
                 ),
                 recentbook(),
               ],
