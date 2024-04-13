@@ -2,8 +2,23 @@ import 'package:e_book/screens/home/components/recent_book.dart';
 import 'package:e_book/themes.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<String> _categories = [
+    'All Books',
+    'Comic',
+    'Novel',
+    'Manga',
+    'Fairy Tail'
+  ];
+
+  int _isSelected = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +120,52 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget categories(int index) {
+      return InkWell(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        onTap: () {
+          setState(() {
+            _isSelected = index;
+          });
+        },
+        child: Container(
+          margin: EdgeInsets.only(
+            top: 30,
+            right: 12,
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 10,
+          ),
+          decoration: BoxDecoration(
+            color: _isSelected == index ? greenColor : transparentColor,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            _categories[index],
+            style: semiBoldText14.copyWith(
+              color: _isSelected == index ? whiteColor : greyColor,
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget listCategories() {
+      return SingleChildScrollView(
+        padding: EdgeInsets.only(left: 30),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: _categories
+              .asMap()
+              .entries
+              .map((MapEntry map) => categories(map.key))
+              .toList(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: ListView(
@@ -144,6 +205,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+          listCategories(),
         ],
       ),
     );
