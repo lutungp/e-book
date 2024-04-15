@@ -1,8 +1,11 @@
+import 'package:e_book/models/book.dart';
 import 'package:e_book/screens/home/components/recent_book.dart';
+import 'package:e_book/screens/home/components/trending_book.dart';
 import 'package:e_book/themes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  static const nameRoute = '/hiomePage';
   const HomePage({super.key});
 
   @override
@@ -166,6 +169,22 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Widget trendingBook() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: Row(
+          children: bookLists
+              .asMap()
+              .entries
+              .map((MapEntry map) => TrendingBook(
+                    info: bookLists[map.key],
+                  ))
+              .toList(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: ListView(
@@ -206,6 +225,20 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           listCategories(),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 30,
+              top: 30,
+            ),
+            child: Text(
+              'Trending Book',
+              style: semiBoldText16.copyWith(color: blackColor),
+            ),
+          ),
+          trendingBook(),
+          SizedBox(
+            height: 30,
+          )
         ],
       ),
     );

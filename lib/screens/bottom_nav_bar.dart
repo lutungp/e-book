@@ -6,8 +6,8 @@ import 'package:e_book/themes.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
+  static const nameRoute = '/';
   const BottomNavBar({Key? key}) : super(key: key);
-
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
